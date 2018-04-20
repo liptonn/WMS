@@ -89,6 +89,8 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
                 if (checkCode != null && password != null) {
                     checkCode = checkCode.toUpperCase();
                     credentials = MD5Util.MD5(password + checkCode);
+
+                    credentials = MD5Util.MD5(MD5Util.MD5(MD5Util.MD5(principal) + principal)+ checkCode);
                 }
 
                 // 清除 session 中的 userInfo 密码敏感信息
